@@ -1,0 +1,10 @@
+data/raw/
+data/*.tsv
+data/*.parquet
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+checkpoints/
+wandb/
+*.pt
+*.bin

@@ -1,0 +1,20 @@
+name: smiles-iupac
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.11
+  - rdkit
+  - pytorch::pytorch
+  - pip
+  - jupyter
+  - pandas
+  - numpy
+  - tqdm
+  - matplotlib
+  - pip:
+    - transformers
+    - tokenizers
+    - datasets
+    - sacrebleu
