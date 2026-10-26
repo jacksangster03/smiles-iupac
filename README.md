@@ -1,6 +1,10 @@
 # SMILES-IUPAC Bi-directional Translation
 
-A lightweight encoder-decoder transformer for bi-directional translation between SMILES strings and IUPAC chemical names. Built as a prototype for the [DeepChem GSoC 2026](https://github.com/deepchem/deepchem/discussions/4703) project on robust chemical name-structure conversion.
+A lightweight encoder-decoder transformer for bi-directional translation between SMILES strings and IUPAC chemical names. Built as a prototype for a proposed [DeepChem GSoC 2026](https://github.com/deepchem/deepchem/discussions/4703) project on robust chemical name-structure conversion.
+
+## Status
+
+Early prototype. The data pipeline, tokenisers, model, training loop and evaluation script are implemented. The repository does **not** include trained weights or benchmark results (`checkpoints/` is gitignored), so it makes no accuracy claim. Only the tokenisers have automated tests (7 pass; they do not exercise the model or training).
 
 ## Architecture
 
@@ -17,7 +21,7 @@ A lightweight encoder-decoder transformer for bi-directional translation between
 ## Data
 
 - **Source**: PubChem CID-SMILES and CID-IUPAC (public domain)
-- **Size**: 500,000 pairs (reservoir sampled from ~90M+ matched entries)
+- **Size**: the preprocessing script samples 500,000 pairs (reservoir sampling over the matched PubChem entries); the sample itself is not committed
 - **Filters**: SMILES length ≤ 150, IUPAC length ≤ 200
 - **Split**: 90/5/5 train/val/test (seed=42)
 
@@ -59,7 +63,7 @@ python evaluate/metrics.py --checkpoint checkpoints/best_smiles2iupac.pt --direc
 ### Run tests
 
 ```bash
-python -m pytest tests/
+python -m pytest tests/    # tokeniser tests only
 ```
 
 ## Project Structure
@@ -86,7 +90,7 @@ smiles-iupac/
 └── environment.yml          # Conda environment specification
 ```
 
-## Planned Improvements (GSoC Coding Period)
+## Planned improvements
 
 - Word-level IUPAC tokeniser with chemistry-aware regex
 - Beam search decoding with length normalisation
